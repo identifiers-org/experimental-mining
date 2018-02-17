@@ -25,6 +25,7 @@ dev_environment: python_install install_requirements
 	@echo "<===|DEVOPS|===> [INSTALL] Development Environment"
 
 install: dev_environment
+	@echo "<===|DEVOPS|===> [INSTALL] Initializing Application Installation"
 
 update_requirements_file: dev_environment
 	#@python_install/bin/pipreqs --use-local --savepath requirements.txt $(PWD)
