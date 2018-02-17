@@ -33,12 +33,15 @@ update_requirements_file: dev_environment
 	@python_install/bin/pip freeze > requirements.txt
 
 clean_dev:
+	@echo "<===|DEVOPS|===> [CLEAN] Removing Python Virtual Environment"
 	@rm -rf python_install
 
 clean_logs:
+	@echo "<===|DEVOPS|===> [CLEAN] "
 	@rm -rf logs/*log
 
 clean_tmp:
+	@echo "<===|DEVOPS|===> [CLEAN] "
 	@rm -rf tmp
 
 clean: clean_logs clean_tmp
