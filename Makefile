@@ -21,3 +21,6 @@ install: dev_environment
 
 update_requirements_file: dev_environment
 	@python_install/bin/pipreqs --use-local --savepath requirements.txt $(PWD)
+
+clean_dev:
+	@rm -rf python_install
