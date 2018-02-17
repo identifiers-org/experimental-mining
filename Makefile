@@ -7,3 +7,7 @@
 install_requirements:
 	@python_install/bin/pip install pipreqs nose
 	@python_install/bin/pip install -r requirements.txt
+
+python_install:
+	@pip install --user virtualenv
+	@virtualenv python_install
