@@ -41,7 +41,7 @@ clean_logs:
 	@rm -rf logs/*log
 
 clean_tmp:
-	@echo "<===|DEVOPS|===> [CLEAN] "
+	@echo "<===|DEVOPS|===> [CLEAN] Removing Temporary folder"
 	@rm -rf tmp
 
 clean: clean_logs clean_tmp
