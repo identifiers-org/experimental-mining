@@ -13,6 +13,7 @@ install_requirements:
 	@python_install/bin/pip install -r requirements.txt
 
 python_install:
+	@echo "<===|DEVOPS|===> [INSTALL] Python Virtual Environment"
 	@pip install --user virtualenv
 	@virtualenv python_install
 
