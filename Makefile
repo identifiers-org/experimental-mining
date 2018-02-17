@@ -24,3 +24,6 @@ update_requirements_file: dev_environment
 
 clean_dev:
 	@rm -rf python_install
+
+clean_logs:
+	@rm -rf logs/*log
