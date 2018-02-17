@@ -37,7 +37,7 @@ clean_dev:
 	@rm -rf python_install
 
 clean_logs:
-	@echo "<===|DEVOPS|===> [CLEAN] "
+	@echo "<===|DEVOPS|===> [CLEAN] Removing logs"
 	@rm -rf logs/*log
 
 clean_tmp:
