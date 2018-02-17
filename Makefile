@@ -30,3 +30,5 @@ clean_logs:
 
 clean_tmp:
 	@rm -rf tmp
+
+clean: clean_logs clean_tmp
