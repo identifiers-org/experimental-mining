@@ -45,6 +45,7 @@ clean_tmp:
 	@rm -rf tmp
 
 clean: clean_logs clean_tmp
+	@echo "<===|DEVOPS|===> [CLEAN] Cleaning ALL"
 
 clean_all: clean clean_dev
 
