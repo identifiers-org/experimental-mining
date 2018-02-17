@@ -27,3 +27,6 @@ clean_dev:
 
 clean_logs:
 	@rm -rf logs/*log
+
+clean_tmp:
+	@rm -rf tmp
