@@ -16,3 +16,5 @@ tmp:
 	@mkdir tmp
 
 dev_environment: python_install install_requirements
+
+install: dev_environment
