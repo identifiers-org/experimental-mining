@@ -11,3 +11,6 @@ install_requirements:
 python_install:
 	@pip install --user virtualenv
 	@virtualenv python_install
+
+tmp:
+	@mkdir tmp
