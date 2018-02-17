@@ -24,7 +24,7 @@ install: dev_environment
 
 update_requirements_file: dev_environment
 	#@python_install/bin/pipreqs --use-local --savepath requirements.txt $(PWD)
-	@python_install/bin/pip freeze -r requirements.txt
+	@python_install/bin/pip freeze > requirements.txt
 
 clean_dev:
 	@rm -rf python_install
