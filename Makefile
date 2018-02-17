@@ -3,3 +3,7 @@
 #														#
 # Author: Manuel Bernal Llinares <mbdebian@gmail.com>	#
 #														#
+
+install_requirements:
+	@python_install/bin/pip install pipreqs nose
+	@python_install/bin/pip install -r requirements.txt
