@@ -22,6 +22,7 @@ tmp:
 	@mkdir tmp
 
 dev_environment: python_install install_requirements
+	@echo "<===|DEVOPS|===> [INSTALL] Development Environment"
 
 install: dev_environment
 
