@@ -187,7 +187,7 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         metadata_report.loc[index].MetadataServiceResponseError = "METADATA SERVICE ERROR"
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].ResourceTestUrl, response.json()))
     metadata_report.loc[index].MetadataServiceResponseStatus = response.status_code
-
+print("=" * 48)
 
 print("{} COLLECTING METADATA FOR RESOURCE URL {}".format("=" * 12, "=" * 12))
 # Get metadata for Home URLs (Resource URLs) landing page
@@ -206,6 +206,7 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         metadata_report.loc[index].HomeUrlMetadataServiceResponseError = "METADATA SERVICE ERROR"
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].HomeUrl, response.json()))
     metadata_report.loc[index].HomeUrlMetadataServiceResponseStatus = response.status_code
+print("=" * 48)
 
 # Have another look at the metadata table
 print("After collecting metadata, the report looks like\n{}".format(metadata_report.head()))
