@@ -85,17 +85,7 @@ resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data
 #            else:
 #                print("NO RESOURCE PREFIX FOR: PID Entry Name '{}', Resource Information '{}'".format(pid_entry['name'], resource['info']))
 
-
-# In[ ]:
-
-
-#resource_prefixes
-
-
-# In[ ]:
-
-
-resource_prefixes_distribution = Counter(resource_prefixes)
+# resource_prefixes_distribution = Counter(resource_prefixes)
 
 
 # In[ ]:
