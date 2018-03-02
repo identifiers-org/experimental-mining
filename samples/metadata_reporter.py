@@ -60,10 +60,10 @@ def get_metadata_for_url(url):
             time.sleep(random.randint(3))
             continue
         if response.ok:
-            print("[METADATA][OK] - '{}'".format(url))
+            #print("[METADATA][OK] - '{}'".format(url))
             break
         else:
-            print("[METADATA][ERROR] - '{}'".format(url))
+            #print("[METADATA][ERROR] - '{}'".format(url))
             break
         # Random wait - TODO - Another magic number!!!
     return response
