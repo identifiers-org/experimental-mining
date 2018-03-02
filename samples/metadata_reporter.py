@@ -1,16 +1,6 @@
-
-# coding: utf-8
-
-# In[ ]:
-
-
 # This script provides some reporting on the resolver data from identifiers.org
 #
 # Author: Manuel Bernal Llinares <mbdebian@gmail.com>
-
-
-# In[ ]:
-
 
 import time
 import random
@@ -24,26 +14,12 @@ from collections import Counter
 from multiprocessing import Pool
 from multiprocessing.pool import ThreadPool
 
-get_ipython().run_line_magic('matplotlib', 'inline')
-
-
-# In[ ]:
-
-
 # Endpoint from where the information is coming
 identifiersorg_resolver_data_url = "https://identifiers.org/rest/collections/expand"
 metadata_service_endpoint_from_url = "http://metadata.api.aws.identifiers.org/getMetadataForUrl"
 
-
-# In[ ]:
-
-
 # Initialize pseudo-random number generator
 random.seed(time.time())
-
-
-# In[ ]:
-
 
 # Helpers
 def make_rest_request_content_type_json(url):
