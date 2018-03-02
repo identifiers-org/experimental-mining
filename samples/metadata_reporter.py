@@ -158,16 +158,7 @@ print("Sample content\n{}".format(metadata_report.head()))
 # Another approach, with Thread Pool
 pool = Pool(processes=mp.cpu_count())
 indexes_to_process = [index for index in range(metadata_report.shape[0]) if metadata_report.loc[index].ResourceTestUrl]
-
-
-# In[ ]:
-
-
 metadata_requests = pool.map(get_metadata_for_url, metadata_report.ResourceTestUrl[indexes_to_process])
-
-
-# In[ ]:
-
 
 for (index, response) in zip(indexes_to_process, metadata_requests):
     if response.ok:
