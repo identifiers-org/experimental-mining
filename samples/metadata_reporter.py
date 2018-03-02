@@ -117,11 +117,8 @@ columns = ['PidEntryName',
            'MetadataServiceResponseError']
 metadata_report = pandas.DataFrame(columns=columns)
 
-
-# In[ ]:
-
-
-# Prepare the URLs and initial report (I could have done everything in one pass, but this is just investigating the dataset)
+# Prepare the URLs and initial report (I could have done everything in one pass,
+# but this is just investigating the dataset)
 for pid_entry in resolver_dump:
     entry = pandas.Series(['---'] * len(columns), index=columns)
     entry.PidEntryName = pid_entry['name']
