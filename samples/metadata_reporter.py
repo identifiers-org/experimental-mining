@@ -17,7 +17,8 @@ from multiprocessing.pool import ThreadPool
 
 # Endpoint from where the information is coming
 identifiersorg_resolver_data_url = "https://identifiers.org/rest/collections/expand"
-metadata_service_endpoint_from_url = "http://metadata.api.aws.identifiers.org/getMetadataForUrl"
+#metadata_service_endpoint_from_url = "http://metadata.api.aws.identifiers.org/getMetadataForUrl"
+metadata_service_endpoint_from_url = "http://localhost:8082/getMetadataForUrl"
 
 # Initialize pseudo-random number generator
 random.seed(time.time())
@@ -165,8 +166,7 @@ print("Sample content\n{}".format(metadata_report.head()))
 #[process.start() for process in metadata_requests.values()]
 
 # Another approach, with Thread Pool
-# pool = Pool(processes=mp.cpu_count())
-pool = Pool(processes=4)
+pool = Pool(processes=mp.cpu_count())
 
 print("{} COLLECTING METADATA FOR COMPACT ID LANDING PAGE {}".format("=" * 12, "=" * 12))
 # Get metadata for ComapactId landing page
