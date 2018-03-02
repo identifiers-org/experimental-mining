@@ -174,11 +174,8 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].ResourceTestUrl, response.json()))
     metadata_report.loc[index].MetadataServiceResponseStatus = response.status_code
 
-
-# In[ ]:
-
-
-metadata_report.head()
+# Have another look at the metadata table
+print("After collecting metadata, the report looks like\n{}".format(metadata_report.head()))
 
 
 # In[ ]:
