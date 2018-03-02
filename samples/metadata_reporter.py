@@ -71,23 +71,8 @@ def get_metadata_for_url(url):
 # Get the resolver data
 resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data_url)
 
-
-# In[ ]:
-
-
 # Workout how many prefixes there are in identifiers.org
-prefixes = set([pid_entry['prefix'] for pid_entry in resolver_dump])
-
-
-# In[ ]:
-
-
-prefixes
-
-
-# In[ ]:
-
-
+# prefixes = set([pid_entry['prefix'] for pid_entry in resolver_dump])
 print("There are #{} Compact ID prefixes registered in identifiers.org".format(len(prefixes)))
 
 
