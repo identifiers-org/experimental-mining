@@ -100,9 +100,6 @@ resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data
 #plt.show()
 
 
-# In[ ]:
-
-
 # Create a report on metadata
 columns = ['PidEntryName',
            'PidEntryPrefix',
