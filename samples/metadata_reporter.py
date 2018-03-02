@@ -142,12 +142,7 @@ for pid_entry in resolver_dump:
 
 # Print out information on the test URLs
 print("Test URLs description\n{}".format(metadata_report.ResourceTestUrl.describe()))
-
-
-# In[ ]:
-
-
-metadata_report.head()
+print("Sample content\n{}".format(metadata_report.head()))
 
 
 # In[ ]:
