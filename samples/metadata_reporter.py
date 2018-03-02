@@ -204,8 +204,6 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].HomeUrl, response.json()))
     metadata_report.loc[index].HomeUrlMetadataServiceResponseStatus = response.status_code
 
-
-
 # Have another look at the metadata table
 print("After collecting metadata, the report looks like\n{}".format(metadata_report.head()))
 # Dump report to file
