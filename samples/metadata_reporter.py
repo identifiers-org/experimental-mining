@@ -68,9 +68,6 @@ def get_metadata_for_url(url):
     return response
 
 
-# In[ ]:
-
-
 # Get the resolver data
 resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data_url)
 
