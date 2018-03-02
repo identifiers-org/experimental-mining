@@ -188,6 +188,8 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].ResourceTestUrl, response.json()))
     metadata_report.loc[index].MetadataServiceResponseStatus = response.status_code
 
+
+print("{} COLLECTING METADATA FOR RESOURCE URL {}".format("=" * 12, "=" * 12))
 # Get metadata for Home URLs (Resource URLs) landing page
 indexes_to_process = [index for index in range(metadata_report.shape[0]) if metadata_report.loc[index].HomeUrl]
 metadata_requests = pool.map(get_metadata_for_url, metadata_report.HomeUrl[indexes_to_process])
