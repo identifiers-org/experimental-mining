@@ -2,6 +2,7 @@
 #
 # Author: Manuel Bernal Llinares <mbdebian@gmail.com>
 
+import sys
 import time
 import random
 import pandas
@@ -144,6 +145,8 @@ for pid_entry in resolver_dump:
 print("Test URLs description\n{}".format(metadata_report.ResourceTestUrl.describe()))
 print("Sample content\n{}".format(metadata_report.head()))
 
+# DEBUG --- REMOVE ---
+sys.exit(0)
 
 # Build the report
 # Parallel call to metadata service, this is a lot slower, good enough as proof of concept
