@@ -73,21 +73,17 @@ resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data
 
 # Workout how many prefixes there are in identifiers.org
 # prefixes = set([pid_entry['prefix'] for pid_entry in resolver_dump])
-print("There are #{} Compact ID prefixes registered in identifiers.org".format(len(prefixes)))
-
-
-# In[ ]:
-
+# print("There are #{} Compact ID prefixes registered in identifiers.org".format(len(prefixes)))
 
 # Check the distribution of resources
-resource_prefixes = []
-for pid_entry in resolver_dump:
-    if 'resources' in pid_entry:
-        for resource in pid_entry['resources']:
-            if 'resourcePrefix' in resource:
-                resource_prefixes.append(resource['resourcePrefix'])
-            else:
-                print("NO RESOURCE PREFIX FOR: PID Entry Name '{}', Resource Information '{}'".format(pid_entry['name'], resource['info']))
+#resource_prefixes = []
+#for pid_entry in resolver_dump:
+#    if 'resources' in pid_entry:
+#        for resource in pid_entry['resources']:
+#            if 'resourcePrefix' in resource:
+#                resource_prefixes.append(resource['resourcePrefix'])
+#            else:
+#                print("NO RESOURCE PREFIX FOR: PID Entry Name '{}', Resource Information '{}'".format(pid_entry['name'], resource['info']))
 
 
 # In[ ]:
