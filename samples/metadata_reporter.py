@@ -187,6 +187,25 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
         print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].ResourceTestUrl, response.json()))
     metadata_report.loc[index].MetadataServiceResponseStatus = response.status_code
 
+# Get metadata for Home URLs (Resource URLs) landing page
+indexes_to_process = [index for index in range(metadata_report.shape[0]) if metadata_report.loc[index].HomeUrl]
+metadata_requests = pool.map(get_metadata_for_url, metadata_report.HomeUrl[indexes_to_process])
+for (index, response) in zip(indexes_to_process, metadata_requests):
+    if response.ok:
+        metadata_report.loc[index].HomeUrlWasMetadataFound = 'Yes'
+        metadata_report.loc[index].HomeUrlMetadataContent = response.json()['metadata']
+        print("[METADATA][OK] - '{}'".format(metadata_report.loc[index].HomeUrl))
+    else:
+        print("[METADATA][ERROR] - '{}'".format(metadata_report.loc[index].HomeUrl))
+    if 'errorMessage' in response.json():
+        metadata_report.loc[index].HomeUrlMetadataServiceResponseError = response.json()['errorMessage']
+    else:
+        metadata_report.loc[index].HomeUrlMetadataServiceResponseError = "METADATA SERVICE ERROR"
+        print("[METADATA][QUERY_ERROR] - '{}', response '{}'".format(metadata_report.loc[index].HomeUrl, response.json()))
+    metadata_report.loc[index].HomeUrlMetadataServiceResponseStatus = response.status_code
+
+
+
 # Have another look at the metadata table
 print("After collecting metadata, the report looks like\n{}".format(metadata_report.head()))
 # Dump report to file
