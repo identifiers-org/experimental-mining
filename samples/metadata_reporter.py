@@ -176,11 +176,5 @@ for (index, response) in zip(indexes_to_process, metadata_requests):
 
 # Have another look at the metadata table
 print("After collecting metadata, the report looks like\n{}".format(metadata_report.head()))
-
-
-# In[ ]:
-
-
 # Dump report to file
-metadata_report.to_csv('metadata_report.csv', encoding='utf-8')
-
+metadata_report.to_csv('metadata_detailed_report.csv', encoding='utf-8')
