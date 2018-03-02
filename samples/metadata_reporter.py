@@ -140,11 +140,8 @@ for pid_entry in resolver_dump:
             resource_entry.ResourceTestUrl = resource['accessURL'].replace('{$id}', resource['localId'])
         metadata_report = metadata_report.append(resource_entry, ignore_index=True)        
 
-
-# In[ ]:
-
-
-metadata_report.ResourceTestUrl.describe()
+# Print out information on the test URLs
+print("Test URLs description\n{}".format(metadata_report.ResourceTestUrl.describe()))
 
 
 # In[ ]:
