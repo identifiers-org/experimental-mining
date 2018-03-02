@@ -145,12 +145,9 @@ print("Test URLs description\n{}".format(metadata_report.ResourceTestUrl.describ
 print("Sample content\n{}".format(metadata_report.head()))
 
 
-# In[ ]:
-
-
+# Build the report
 # Parallel call to metadata service, this is a lot slower, good enough as proof of concept
 #metadata_requests = {index: threading.Thread(target=get_metadata_for_url(metadata_report.loc[index].ResourceTestUrl)) for index in range(metadata_report.shape[0]) if metadata_report.loc[index].ResourceTestUrl}
-
 # Parallel wrapper - Version using multiprocessing, it crashes within Jupyter
 #def metadata_request_parallel_wrapper(context, url):
 #    context.put(get_metadata_for_url(url))
