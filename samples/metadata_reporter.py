@@ -88,10 +88,7 @@ resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data
 # resource_prefixes_distribution = Counter(resource_prefixes)
 # print("There #{} Resource Selectors in identifiers.org".format(len(resource_prefixes_distribution.keys())))
 
-
-# In[ ]:
-
-
+# Plotting the distribution
 labels = sorted(resource_prefixes_distribution.keys())
 values = [resource_prefixes_distribution.get(key) for key in labels]
 
