@@ -89,20 +89,15 @@ resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data
 # print("There #{} Resource Selectors in identifiers.org".format(len(resource_prefixes_distribution.keys())))
 
 # Plotting the distribution
-labels = sorted(resource_prefixes_distribution.keys())
-values = [resource_prefixes_distribution.get(key) for key in labels]
-
-
-# In[ ]:
-
-
+#labels = sorted(resource_prefixes_distribution.keys())
+#values = [resource_prefixes_distribution.get(key) for key in labels]
 # I don't like this Pie Chart
-fig1, ax1 = plt.subplots()
-fig1.set_size_inches(18, 5)
-ax1.bar(labels, values, 1/1.5, color="blue")
+#fig1, ax1 = plt.subplots()
+#fig1.set_size_inches(18, 5)
+#ax1.bar(labels, values, 1/1.5, color="blue")
 #ax1.pie(values, labels=labels, shadow=True, startangle=90)
 #ax1.axis('equal')
-plt.show()
+#plt.show()
 
 
 # In[ ]:
