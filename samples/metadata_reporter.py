@@ -165,7 +165,8 @@ print("Sample content\n{}".format(metadata_report.head()))
 #[process.start() for process in metadata_requests.values()]
 
 # Another approach, with Thread Pool
-pool = Pool(processes=mp.cpu_count())
+# pool = Pool(processes=mp.cpu_count())
+pool = Pool(processes=4)
 
 print("{} COLLECTING METADATA FOR COMPACT ID LANDING PAGE {}".format("=" * 12, "=" * 12))
 # Get metadata for ComapactId landing page
