@@ -42,9 +42,6 @@ def make_rest_request_content_type_json(url):
     response.raise_for_status()
 
 
-# In[ ]:
-
-
 def get_metadata_for_url(url):
     """
     This Helper queries the metadata service with a URL, 
