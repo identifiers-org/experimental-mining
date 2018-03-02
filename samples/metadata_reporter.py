@@ -115,7 +115,12 @@ columns = ['PidEntryName',
            'MetadataContent', 
            'ResourceTestUrl', 
            'MetadataServiceResponseStatus', 
-           'MetadataServiceResponseError']
+           'MetadataServiceResponseError',
+           'HomeUrl',
+           'HomeUrlWasMetadataFound',
+           'HomeUrlMetadataContent',
+           'HomeUrlMetadataServiceResponseStatus',
+           'HomeUrlMetadataServiceResponseError']
 metadata_report = pandas.DataFrame(columns=columns)
 
 # Prepare the URLs and initial report (I could have done everything in one pass,
@@ -139,7 +144,11 @@ for pid_entry in resolver_dump:
         resource_entry.ResourceTestUrl = None
         if ('accessURL' in resource) and ('localId' in resource):
             resource_entry.ResourceTestUrl = resource['accessURL'].replace('{$id}', resource['localId'])
-        metadata_report = metadata_report.append(resource_entry, ignore_index=True)        
+        # Fill in the information for the home URL
+        if 'resourceURL' in resource:
+            resource_entry.HomeUrl = resource['resourceURL']
+        resource_entry.HomeUrlWasMetadataFound = 'No'
+        metadata_report = metadata_report.append(resource_entry, ignore_index=True)
 
 # Print out information on the test URLs
 print("Test URLs description\n{}".format(metadata_report.ResourceTestUrl.describe()))
