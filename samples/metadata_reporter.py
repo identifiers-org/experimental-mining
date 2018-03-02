@@ -169,9 +169,10 @@ sys.exit(0)
 
 # Another approach, with Thread Pool
 pool = Pool(processes=mp.cpu_count())
+
+# Get metadata for ComapactId landing page
 indexes_to_process = [index for index in range(metadata_report.shape[0]) if metadata_report.loc[index].ResourceTestUrl]
 metadata_requests = pool.map(get_metadata_for_url, metadata_report.ResourceTestUrl[indexes_to_process])
-
 for (index, response) in zip(indexes_to_process, metadata_requests):
     if response.ok:
         metadata_report.loc[index].WasMetadataFound = 'Yes'
