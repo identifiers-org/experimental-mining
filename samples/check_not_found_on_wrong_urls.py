@@ -63,6 +63,7 @@ def check_url_http_status(url):
                 print("[WRONG_RESPONSE] {}".format(url))
             else:
                 print("[   OK({})    ] {}".format(response.status, url))
+            break
         except:
             time.sleep(3)
         counter -= 1
