@@ -60,7 +60,7 @@ def check_url_http_status(url):
         try:
             response = http.request('GET', url)
             if response.status == 200:
-                print("[WRONG_RESPONSE] {}".format(url))
+                print("[  WRONG({})  ] {}".format(response.status, url))
             else:
                 print("[   OK({})    ] {}".format(response.status, url))
             break
