@@ -45,7 +45,7 @@ def make_rest_request_content_type_json(url):
 
 def check_url_http_status(url):
     http = urllib3.PoolManager()
-    response = http.request('GET', url)
+    response = http.request('GET', url, cert_reqs='CERT_NONE', assert_hostname=False)
     if response.ok:
         print("[WRONG_RESPONSE] {}".format(url))
     else:
