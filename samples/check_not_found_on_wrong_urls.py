@@ -25,6 +25,7 @@ random.seed(time.time())
 # Disable warnings, hopefully for HTTPS connections
 urllib3.disable_warnings()
 
+
 # Helpers
 def make_rest_request_content_type_json(url):
     # TODO - Magic number here!!!
@@ -53,19 +54,27 @@ def chunks(mylist, chunksize):
 
 def check_url_http_status(url):
     http = urllib3.PoolManager()
-    response = http.request('GET', url)
-    if response.ok:
-        print("[WRONG_RESPONSE] {}".format(url))
-    else:
-        print("[     OK       ] {}".format(url))
-    sys.stdout.flush()
+    response = None
+    counter = 12
+    while counter > 0:
+        try:
+            response = http.request('GET', url)
+            if response.status == '200':
+                print("[WRONG_RESPONSE] {}".format(url))
+            else:
+                print("[   OK({})    ] {}".format(response.status, url))
+        except:
+            time.sleep(3)
+            counter -= 1
+            if counter == 0:
+                print("[-RETRY__ERROR-] {}".format(url))
     return {"url": url, "response": response}
 
 
 # Get the resolver data
 resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data_url)
 
-print("Building URLs")
+print("---> Building URLs")
 urls = []
 for pid_entry in resolver_dump:
     if ('resources' not in pid_entry) or (not pid_entry['resources']):
@@ -74,14 +83,16 @@ for pid_entry in resolver_dump:
         if ('accessURL' in resource) and ('localId' in resource):
             urls.append(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
 
-print("Checking #{} URLs".format(len(urls)))
+print("---> Checking #{} URLs".format(len(urls)))
 
 # Check the URLS
 nprocesses = mp.cpu_count()
 pool = Pool(processes=nprocesses)
-responses = list(itertools.chain([pool.map(check_url_http_status,chunks(urls, nprocesses))]))
+responses = []
+for i in range(0, len(urls), nprocesses):
+    responses = itertools.chain(responses, pool.map(check_url_http_status, urls[i: i + nprocesses]))
 print("---> END, with #{} responses".format(len(responses)))
 print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
 for response in responses:
-    if not response.response.ok:
+    if (not response.response) or (response.response.status != '200'):
         print(response.url)
