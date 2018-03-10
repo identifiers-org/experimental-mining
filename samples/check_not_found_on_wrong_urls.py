@@ -59,15 +59,15 @@ def check_url_http_status(url):
     while counter > 0:
         try:
             response = http.request('GET', url)
-            if response.status == '200':
+            if response.status == 200:
                 print("[WRONG_RESPONSE] {}".format(url))
             else:
                 print("[   OK({})    ] {}".format(response.status, url))
         except:
             time.sleep(3)
-            counter -= 1
-            if counter == 0:
-                print("[-RETRY__ERROR-] {}".format(url))
+        counter -= 1
+        if counter == 0:
+            print("[-RETRY__ERROR-] {}".format(url))
     return {"url": url, "response": response}
 
 
@@ -94,5 +94,5 @@ for i in range(0, len(urls), nprocesses):
 print("---> END, with #{} responses".format(len(responses)))
 print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
 for response in responses:
-    if (not response.response) or (response.response.status != '200'):
+    if (not response.response) or (response.response.status != 200):
         print(response.url)
