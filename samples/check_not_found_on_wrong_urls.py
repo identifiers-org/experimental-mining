@@ -60,26 +60,22 @@ def check_url_http_status(url):
     while counter > 0:
         try:
             response = http.request('GET', url, timeout=1.0)
-            if response.status == 200:
-                print("[  WRONG({})  ] {}".format(response.status, url))
-                pass
-            else:
-                print("[   OK({})    ] {}".format(response.status, url))
-                pass
+            #if response.status == 200:
+                #print("[  WRONG({})  ] {}".format(response.status, url))
+                #pass
+            #else:
+                #print("[   OK({})    ] {}".format(response.status, url))
+                #pass
             break
         except:
             time.sleep(1)
         counter -= 1
         if counter == 0:
-            print("[-RETRY__ERROR-] {}".format(url))
+            #print("[-RETRY__ERROR-] {}".format(url))
             pass
     if response:
         response = response.status
     return {"url": url, "response": response}
-
-
-def check_url_http_status_init(q):
-    check_url_http_status.q = q
 
 
 # Get the resolver data
@@ -95,23 +91,25 @@ for pid_entry in resolver_dump:
             urls.append(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
 
 print("---> Checking #{} URLs".format(len(urls)))
-
+sys.stdout.flush()
 # Check the URLS
-#nprocesses = mp.cpu_count() * 8
-#pool = Pool(processes=nprocesses)
-#responses = []
-#for i in range(0, len(urls), nprocesses):
-#    start = i
-#    end = i + nprocesses
-#    print("---> Exploring from {} to {}, out of {}".format(start, end - 1, len(urls)))
-#    batch = pool.map(check_url_http_status, urls[start : end])
-#    responses.append(batch)
-#    sys.stdout.flush()
-responses = [check_url_http_status(url) for url in urls]
+nprocesses = mp.cpu_count() * 2
+pool = Pool(processes=nprocesses)
+responses = []
+for i in range(0, len(urls), nprocesses):
+    start = i
+    end = i + nprocesses
+    print("---> Exploring from {} to {}, out of {}".format(start, end - 1, len(urls)))
+    sys.stdout.flush()
+    batch = pool.map(check_url_http_status, urls[start : end])
+    responses.append(batch)
+#responses = [check_url_http_status(url) for url in urls]
 print("---> END, with #{} responses".format(len(responses)))
-print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
-for response in responses:
+print("=" * 20 + " URL STATUS REPORT " + "=" * 20)
+for response in list(itertools.chain(responses)):
     if not response.response:
-        print("[ERROR] {}".format(response.url))
-    elif response.response != 200:
-        print(response.url)
+        print("[---- ERROR ----] {}".format(response.url))
+    elif response.response == 200:
+        print("[  WRONG({})  ] {}".format(response, response.url))
+    else:
+        print("[   OK({})    ] {}".format(response, response.url))
