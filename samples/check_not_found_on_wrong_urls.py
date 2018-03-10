@@ -67,3 +67,7 @@ for pid_entry in resolver_dump:
 # Check the URLS
 pool = Pool(processes=mp.cpu_count() * 4)
 responses = pool.map(check_url_http_status,urls)
+print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
+for response in responses:
+    if not response.response.ok:
+        print(response.url)
