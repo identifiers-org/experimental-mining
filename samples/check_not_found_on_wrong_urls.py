@@ -5,8 +5,9 @@
 import sys
 import time
 import random
-import requests
 import urllib3
+import requests
+import itertools
 import threading
 import numpy as np
 import multiprocessing as mp
@@ -45,6 +46,11 @@ def make_rest_request_content_type_json(url):
     response.raise_for_status()
 
 
+def chunks(mylist, chunksize):
+    for i in range(0, len(mylist), chunksize):
+        yield mylist[i: i + chunksize]
+
+
 def check_url_http_status(url):
     http = urllib3.PoolManager()
     response = http.request('GET', url)
@@ -52,12 +58,14 @@ def check_url_http_status(url):
         print("[WRONG_RESPONSE] {}".format(url))
     else:
         print("[     OK       ] {}".format(url))
+    sys.stdout.flush()
     return {"url": url, "response": response}
 
 
 # Get the resolver data
 resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data_url)
 
+print("Building URLs")
 urls = []
 for pid_entry in resolver_dump:
     if ('resources' not in pid_entry) or (not pid_entry['resources']):
@@ -66,9 +74,13 @@ for pid_entry in resolver_dump:
         if ('accessURL' in resource) and ('localId' in resource):
             urls.append(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
 
+print("Checking #{} URLs".format(len(urls)))
+
 # Check the URLS
-pool = Pool(processes=mp.cpu_count() * 4)
-responses = pool.map(check_url_http_status,urls)
+nprocesses = mp.cpu_count()
+pool = Pool(processes=nprocesses)
+responses = list(itertools.chain([pool.map(check_url_http_status,chunks(urls, nprocesses))]))
+print("---> END, with #{} responses".format(len(responses)))
 print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
 for response in responses:
     if not response.response.ok:
