@@ -65,7 +65,7 @@ def check_url_http_status(url):
                 print("[   OK({})    ] {}".format(response.status, url))
             break
         except:
-            time.sleep(3)
+            time.sleep(1)
         counter -= 1
         if counter == 0:
             print("[-RETRY__ERROR-] {}".format(url))
@@ -87,7 +87,7 @@ for pid_entry in resolver_dump:
 print("---> Checking #{} URLs".format(len(urls)))
 
 # Check the URLS
-nprocesses = mp.cpu_count()
+nprocesses = mp.cpu_count() * 8
 pool = Pool(processes=nprocesses)
 responses = []
 for i in range(0, len(urls), nprocesses):
