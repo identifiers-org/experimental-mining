@@ -50,4 +50,4 @@ for pid_entry in resolver_dump:
         continue
     for resource in pid_entry['resources']:
         if ('accessURL' in resource) and ('localId' in resource):
-            print(str(resource['accessURL'].replace('{$id}', resource['localId'])))
+            print(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
