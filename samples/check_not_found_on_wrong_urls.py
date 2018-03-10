@@ -102,14 +102,14 @@ for i in range(0, len(urls), nprocesses):
     print("---> Exploring from {} to {}, out of {}".format(start, end - 1, len(urls)))
     sys.stdout.flush()
     batch = pool.map(check_url_http_status, urls[start : end])
-    responses.append(batch)
+    responses.extend(batch)
 #responses = [check_url_http_status(url) for url in urls]
 print("---> END, with #{} responses".format(len(responses)))
 print("=" * 20 + " URL STATUS REPORT " + "=" * 20)
-for response in list(itertools.chain(responses)):
-    if not response.response:
-        print("[---- ERROR ----] {}".format(response.url))
-    elif response.response == 200:
-        print("[  WRONG({})  ] {}".format(response, response.url))
+for response in responses:
+    if not response["response"]:
+        print("[---- ERROR ---] {}".format(response["url"]))
+    elif response["response"] == 200:
+        print("[  WRONG({})  ] {}".format(response["response"], response["url"]))
     else:
-        print("[   OK({})    ] {}".format(response, response.url))
+        print("[   OK({})    ] {}".format(response["response"], response["url"]))
