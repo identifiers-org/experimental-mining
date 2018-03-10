@@ -50,14 +50,20 @@ def check_url_http_status(url):
         print("[WRONG_RESPONSE] {}".format(url))
     else:
         print("[     OK       ] {}".format(url))
+    return {"url": url, "response": response}
 
 
 # Get the resolver data
 resolver_dump = make_rest_request_content_type_json(identifiersorg_resolver_data_url)
 
+urls = []
 for pid_entry in resolver_dump:
     if ('resources' not in pid_entry) or (not pid_entry['resources']):
         continue
     for resource in pid_entry['resources']:
         if ('accessURL' in resource) and ('localId' in resource):
-            print(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
+            urls.append(str(resource['accessURL'].replace('{$id}', "TOTALLYWRONGIDFORSURE")))
+
+# Check the URLS
+pool = Pool(processes=mp.cpu_count() * 4)
+responses = pool.map(check_url_http_status,urls)
