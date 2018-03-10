@@ -35,7 +35,7 @@ def make_rest_request_content_type_json(url):
     while n_attempts:
         n_attempts -= 1
         try:
-            response = requests.get(url, headers={"Content-Type": "application/json"})
+            response = requests.get(url, headers={"Content-Type": "application/json"}, timeout=3.0)
         except Exception as e:
             # Any possible exception counts towards the attempt counter
             # Random wait - TODO - Another magic number!!!
@@ -59,7 +59,7 @@ def check_url_http_status(url):
     counter = 3
     while counter > 0:
         try:
-            response = http.request('GET', url)
+            response = http.request('GET', url, timeout=1.0)
             if response.status == 200:
                 print("[  WRONG({})  ] {}".format(response.status, url))
                 pass
