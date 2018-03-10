@@ -12,8 +12,9 @@ import threading
 import numpy as np
 import multiprocessing as mp
 import matplotlib.pyplot as plt
+from threading import Thread
 from collections import Counter
-from multiprocessing import Pool
+from multiprocessing import Pool, Process
 from multiprocessing.pool import ThreadPool
 
 # Endpoint from where the information is coming
@@ -55,21 +56,30 @@ def chunks(mylist, chunksize):
 def check_url_http_status(url):
     http = urllib3.PoolManager()
     response = None
-    counter = 12
+    counter = 3
     while counter > 0:
         try:
             response = http.request('GET', url)
             if response.status == 200:
                 print("[  WRONG({})  ] {}".format(response.status, url))
+                pass
             else:
                 print("[   OK({})    ] {}".format(response.status, url))
+                pass
             break
         except:
             time.sleep(1)
         counter -= 1
         if counter == 0:
             print("[-RETRY__ERROR-] {}".format(url))
+            pass
+    if response:
+        response = response.status
     return {"url": url, "response": response}
+
+
+def check_url_http_status_init(q):
+    check_url_http_status.q = q
 
 
 # Get the resolver data
@@ -87,13 +97,21 @@ for pid_entry in resolver_dump:
 print("---> Checking #{} URLs".format(len(urls)))
 
 # Check the URLS
-nprocesses = mp.cpu_count() * 8
-pool = Pool(processes=nprocesses)
-responses = []
-for i in range(0, len(urls), nprocesses):
-    responses = itertools.chain(responses, pool.map(check_url_http_status, urls[i: i + nprocesses]))
+#nprocesses = mp.cpu_count() * 8
+#pool = Pool(processes=nprocesses)
+#responses = []
+#for i in range(0, len(urls), nprocesses):
+#    start = i
+#    end = i + nprocesses
+#    print("---> Exploring from {} to {}, out of {}".format(start, end - 1, len(urls)))
+#    batch = pool.map(check_url_http_status, urls[start : end])
+#    responses.append(batch)
+#    sys.stdout.flush()
+responses = [check_url_http_status(url) for url in urls]
 print("---> END, with #{} responses".format(len(responses)))
 print("=" * 20 + " WRONG AND INTERESTING URLS " + "=" * 20)
 for response in responses:
-    if (not response.response) or (response.response.status != 200):
+    if not response.response:
+        print("[ERROR] {}".format(response.url))
+    elif response.response != 200:
         print(response.url)
