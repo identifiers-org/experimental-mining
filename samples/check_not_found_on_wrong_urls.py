@@ -5,8 +5,8 @@
 import sys
 import time
 import random
-import pandas
 import requests
+import urllib3
 import threading
 import numpy as np
 import multiprocessing as mp
@@ -20,6 +20,7 @@ identifiersorg_resolver_data_url = "https://identifiers.org/rest/collections/exp
 
 # Initialize pseudo-random number generator
 random.seed(time.time())
+
 
 # Helpers
 def make_rest_request_content_type_json(url):
@@ -40,6 +41,15 @@ def make_rest_request_content_type_json(url):
         # Random wait - TODO - Another magic number!!!
         time.sleep(random.randint(10))
     response.raise_for_status()
+
+
+def check_url_http_status(url):
+    http = urllib3.PoolManager()
+    response = http.request('GET', url)
+    if response.ok:
+        print("[WRONG_RESPONSE] {}".format(url))
+    else:
+        print("[     OK       ] {}".format(url))
 
 
 # Get the resolver data
