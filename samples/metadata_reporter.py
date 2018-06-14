@@ -67,6 +67,7 @@ def get_metadata_for_url(url):
             #print("[METADATA][ERROR] - '{}'".format(url))
             #break
         # Random wait - TODO - Another magic number!!!
+        break
     return response
 
 
