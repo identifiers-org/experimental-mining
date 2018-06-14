@@ -54,18 +54,18 @@ def get_metadata_for_url(url):
     while n_attempts:
         n_attempts -= 1
         try:
-            response = requests.post(metadata_service_endpoint_from_url, json={"url": url})
+            response = requests.post(metadata_service_endpoint_from_url, json={"apiVersion": "1.0", "payload": {"url": url}})
         except Exception as e:
             # Any possible exception counts towards the attempt counter
             # Random wait - TODO - Another magic number!!!
             time.sleep(random.randint(3))
             continue
-        if response.ok:
+        #if response.ok:
             #print("[METADATA][OK] - '{}'".format(url))
-            break
-        else:
+            #break
+        #else:
             #print("[METADATA][ERROR] - '{}'".format(url))
-            break
+            #break
         # Random wait - TODO - Another magic number!!!
     return response
 
