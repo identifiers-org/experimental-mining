@@ -176,7 +176,7 @@ metadata_requests = pool.map(get_metadata_for_url, metadata_report.ResourceTestU
 for (index, response) in zip(indexes_to_process, metadata_requests):
     if response.ok:
         metadata_report.loc[index].WasMetadataFound = 'Yes'
-        metadata_report.loc[index].MetadataContent = response.json()['metadata']
+        metadata_report.loc[index].MetadataContent = response.json()['payload']['metadata']
         print("[METADATA][OK] - '{}'".format(metadata_report.loc[index].ResourceTestUrl))
     else:
         print("[METADATA][ERROR] - '{}'".format(metadata_report.loc[index].ResourceTestUrl))
@@ -195,7 +195,7 @@ metadata_requests = pool.map(get_metadata_for_url, metadata_report.HomeUrl[index
 for (index, response) in zip(indexes_to_process, metadata_requests):
     if response.ok:
         metadata_report.loc[index].HomeUrlWasMetadataFound = 'Yes'
-        metadata_report.loc[index].HomeUrlMetadataContent = response.json()['metadata']
+        metadata_report.loc[index].HomeUrlMetadataContent = response.json()['payload']['metadata']
         print("[METADATA][OK] - '{}'".format(metadata_report.loc[index].HomeUrl))
     else:
         print("[METADATA][ERROR] - '{}'".format(metadata_report.loc[index].HomeUrl))
