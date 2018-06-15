@@ -10,7 +10,7 @@ import requests
 import threading
 import numpy as np
 import multiprocessing as mp
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from collections import Counter
 from multiprocessing import Pool
 from multiprocessing.pool import ThreadPool
