@@ -4,6 +4,7 @@ certifi==2018.1.18
 chardet==3.0.4
 cycler==0.10.0
 decorator==4.2.1
+Deprecated==1.2.4
 docopt==0.6.2
 entrypoints==0.2.3
 get==0.0.39
@@ -39,7 +40,9 @@ post==0.0.26
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 public==0.0.65
+PyGithub==1.43.3
 Pygments==2.2.0
+PyJWT==1.7.0
 pyparsing==2.2.0
 python-dateutil==2.6.1
 pytz==2018.3
@@ -59,4 +62,5 @@ urllib3==1.22
 wcwidth==0.1.7
 webencodings==0.5.1
 widgetsnbextension==3.1.4
+wrapt==1.10.11
 yarg==0.1.9
