@@ -45,7 +45,7 @@ ptyprocess==0.5.2
 public==0.0.65
 PyGithub==1.43.3
 Pygments==2.2.0
-PyJWT==1.7.0
+PyJWT==2.4.0
 pyparsing==2.2.0
 python-dateutil==2.6.1
 pytz==2018.3
